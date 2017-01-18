@@ -1,9 +1,9 @@
 //Aquí vamos a poner toda la configuración de Express
-var express = require('express');
-var bodyParser = require('body-parser');
+var express     = require('express');
+var bodyParser  = require('body-parser');
 
 var app   = express();
-var api = require('./routes/favorito');
+var api   = require('./routes/favorito');
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
