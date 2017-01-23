@@ -57,9 +57,18 @@ function saveFavorito(request, response){
 }
 
 function updateFavorito(request, response){
-  var params = request.body;
+  var favoritoId = request.params.id;
+  var update = request.body;
 
-  response.status(200).send({update: true});
+  console.log(update);
+
+  Favorito.findByIdAndUpdate(favoritoId, update, (error, favoritoUpdated) => {
+    if(error){
+      response.status(500).send({message: 'Error al actualizar el marcador'});
+    }
+
+    response.status(200).send({favorito: favoritoUpdated});
+  });
 }
 
 function deleteFavorito(request, response){
