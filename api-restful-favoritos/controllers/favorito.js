@@ -1,5 +1,7 @@
 'use strict'
 
+var Favorito = require('../models/favorito');
+
 function prueba(request, response){
   var nombre = request.params.nombre || 'SIN NOMBRE';
 
@@ -15,10 +17,34 @@ function getFavorito(request, response){
   response.status(200).send({data:favoritoId});
 }
 
-function saveFavorito(request, response){
-  var params = request.body;
+function getFavoritos(request, response){
 
-  response.status(200).send({favorito: params});
+    Favorito.find({}).sort('-title').exec((err, favoritos) => {
+    if(err){
+      response.status(500).send({message: 'Error al devolver los marcadores'});
+    }
+
+    if(!favoritos) response.status(404).send({message: 'No hay marcadores'});
+
+    response.status(200).send({favoritos});
+  });
+}
+
+
+function saveFavorito(request, response){
+  var favorito = new Favorito();
+
+  var params = request.body;
+  favorito.title = params.title;
+  favorito.description = params.description;
+  favorito.url = params.url;
+
+  favorito.save((err,favoritoStored) => {
+    if(err){
+      response.status(500).send({message: 'Error al guardar el marcador'});
+    }
+    response.status(200).send({favorito : favoritoStored});
+  });
 }
 
 function updateFavorito(request, response){
@@ -36,6 +62,7 @@ function deleteFavorito(request, response){
 module.exports = {
   prueba,
   getFavorito,
+  getFavoritos,
   saveFavorito,
   updateFavorito,
   deleteFavorito
