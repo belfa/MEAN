@@ -12,18 +12,19 @@ function prueba(request, response){
 }
 
 function getFavorito(request, response){
-  var favoritoId = request.params.id;
+    var favoritoId = request.params.id;
 
-  Favorito.findById(favoritoId, function(error, favorito){
-    if(error){
-      response.status(500).send({message: 'Error al devolver el marcador'});
-    }
-
-    if(!favorito){
-      response.status(404).send({message: 'No hay marcador'});
-    }
-    response.status(200).send({favorito});
-  });
+    Favorito.findById(favoritoId, function(error, favorito){
+        if(error){
+            response.status(500).send({message: 'Error al devolver el marcador'});
+        }else{
+            if(!favorito){
+                response.status(404).send({message: 'No hay marcador'});
+            }else{
+                response.status(200).send({favorito});
+            }
+        }
+    });
 }
 
 function getFavoritos(request, response){
@@ -31,11 +32,11 @@ function getFavoritos(request, response){
     Favorito.find({}).sort('-title').exec((err, favoritos) => {
     if(err){
       response.status(500).send({message: 'Error al devolver los marcadores'});
-    }
+      }else {
+          if(!favoritos) response.status(404).send({message: 'No hay marcadores'});
 
-    if(!favoritos) response.status(404).send({message: 'No hay marcadores'});
-
-    response.status(200).send({favoritos});
+          else response.status(200).send({favoritos});
+      }
   });
 }
 
@@ -50,9 +51,10 @@ function saveFavorito(request, response){
 
   favorito.save((err,favoritoStored) => {
     if(err){
-      response.status(500).send({message: 'Error al guardar el marcador'});
+        response.status(500).send({message: 'Error al guardar el marcador'});
+    }else{
+        response.status(200).send({favorito : favoritoStored});
     }
-    response.status(200).send({favorito : favoritoStored});
   });
 }
 
@@ -63,9 +65,7 @@ function updateFavorito(request, response){
   Favorito.findByIdAndUpdate(favoritoId, update, (error, favoritoUpdated) => {
     if(error){
       response.status(500).send({message: 'Error al actualizar el marcador'});
-    }
-
-    response.status(200).send({favorito: favoritoUpdated});
+  }else response.status(200).send({favorito: favoritoUpdated});
   });
 }
 
