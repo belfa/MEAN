@@ -5,20 +5,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-// Importar Component desde el núcleo de Angular
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var core_1 = require("@angular/core");
-// Decorador component, indicamos en que etiqueta se va a cargar la plantilla
-var AppComponent = (function () {
-    // Clase del componente donde irán los datos y funcionalidades
-    function AppComponent() {
+var FavoritosListComponent = (function () {
+    function FavoritosListComponent() {
+        this.title = 'Listado de marcadores: ';
     }
-    return AppComponent;
+    return FavoritosListComponent;
 }());
-AppComponent = __decorate([
+FavoritosListComponent = __decorate([
     core_1.Component({
-        selector: 'my-app',
-        template: '<h1>Hola mundo con Angular 2 !!</h1>'
-    })
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+        selector: 'favoritos-list',
+        templateUrl: 'app/views/favoritos-list.html'
+    }),
+    __metadata("design:paramtypes", [])
+], FavoritosListComponent);
+exports.FavoritosListComponent = FavoritosListComponent;
+//# sourceMappingURL=favoritos-list-component.js.map
