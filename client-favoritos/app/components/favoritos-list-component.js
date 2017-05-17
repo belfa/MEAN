@@ -14,16 +14,18 @@ var FavoritosListComponent = (function () {
     function FavoritosListComponent(_favoritoService) {
         this._favoritoService = _favoritoService;
         this.title = 'Listado de marcadores: ';
+        this.loading = true;
     }
     FavoritosListComponent.prototype.ngOnInit = function () {
         var _this = this;
-        console.log('FavoritosListComponent cargado!!!!');
         this._favoritoService.getFavoritos().subscribe(function (result) {
             console.log(result);
             _this.favoritos = result.favoritos;
             if (!_this.favoritos) {
                 alert('FavoritosListComponent: Error en el servidor');
             }
+            else
+                _this.loading = false;
         }, function (error) {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {

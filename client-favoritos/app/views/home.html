@@ -1,13 +1,18 @@
 <header id="header">
-    <img src="../../assets/images/angular-icon.svg" id="logo"/>
+    <a [routerLink]="['/']">
+        <img src="../../assets/images/angular-icon.svg" id="logo"/>
+    </a>
     <div class="title-subtitle">
         <h1>{{title}}</h1>
         <p>{{description}}</p>
     </div>
+    <a class="btn-add-favorito" [routerLink]="['crear-marcador']">
+        Crear marcador
+    </a>
     <div class="clearfix"></div>
 </header>
 <section class="main">
     <!--MOSTRAMOS OTRO COMPONENTE-->
-    <favoritos-list></favoritos-list>
+    <router-outlet></router-outlet>
     <div class="clearfix"></div>
 </section>
