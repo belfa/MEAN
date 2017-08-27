@@ -18,8 +18,28 @@ export class FavoritoService{
                          .map(res => res.json());
     }
 
+    addFarovito(favorito: Favorito){
+        let json = JSON.stringify(favorito);
+        let params = json;
+        let headers = new Headers({'Content-Type':'application/json'});
+
+        return this._http.post(this.url+'/favorito', params, {headers: headers})
+                .map(res => res.json() );
+
+    }
+
     getFavorito(id: string){
         return this._http.get(this.url+'/favorito/'+id)
         .map(res => res.json());
+    }
+
+    editFavorito(id:string, favorito: Favorito){
+        let json = JSON.stringify(favorito);
+        let params = json;
+        let headers = new Headers({'Content-Type':'application/json'});
+
+        return this._http.put(this.url+'/favorito/'+id, params, {headers: headers})
+                .map(res => res.json() );
+
     }
 }
