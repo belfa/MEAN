@@ -157,3 +157,11 @@ footer{
     margin-top: 20px;
     padding: 20px;
 }
+
+.seguro{
+    position: absolute;
+    margin-top: -95px;
+    background: white;
+    width: 275px;
+    text-align: center;
+}
